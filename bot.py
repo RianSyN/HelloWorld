@@ -11,8 +11,8 @@ from googletrans import Translator
 from humanfriendly import format_timespan, format_size, format_number, format_length
 import time, random, sys, json, codecs, threading, glob, re, string, os, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
 
-client = LINE()
-#client = LINE("")
+#client = LINE()
+client = LINE("EsucStOh6MFludaUdxEe./nMb4lYrHfyjvS7txenYVG.2LXD0/p+tU/seXnM0pvwU4QfRX1nT0dka+lts9/VdFQ=")
 clientMid = client.profile.mid
 clientProfile = client.getProfile()
 clientSettings = client.getSettings()
@@ -316,82 +316,61 @@ def helpmessage():
         key = settings['keyCommand']
     else:
         key = ''
-    helpMessage =   "╔══[ Help Message ]" + "\n" + \
-                    "╠ " + key + "Help" + "\n" + \
-                    "╠ " + key + "Translate" + "\n" + \
-                    "╠ " + key + "TTS" + "\n" + \
-                    "╠══[ Status Command ]" + "\n" + \
-                    "╠ " + key + "Restart" + "\n" + \
-                    "╠ " + key + "Runtime" + "\n" + \
-                    "╠ " + key + "Speed" + "\n" + \
-                    "╠ " + key + "Status" + "\n" + \
-                    "╠ MyKey" + "\n" + \
-                    "╠ SetKey「On/Off」" + "\n" + \
-                    "╠══[ Settings Command ]" + "\n" + \
-                    "╠ " + key + "AutoAdd「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoJoin「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoJoinTicket「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoLeave「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoRead「On/Off」" + "\n" + \
-                    "╠ " + key + "AutoRespon「On/Off」" + "\n" + \
-                    "╠ " + key + "CheckContact「On/Off」" + "\n" + \
-                    "╠ " + key + "CheckPost「On/Off」" + "\n" + \
-                    "╠ " + key + "CheckSticker「On/Off」" + "\n" + \
-                    "╠ " + key + "UnsendChat「On/Off」" + "\n" + \
-                    "╠══[ Self Command ]" + "\n" + \
-                    "╠ " + key + "ChangeName:「Query」" + "\n" + \
-                    "╠ " + key + "ChangeBio:「Query」" + "\n" + \
-                    "╠ " + key + "Me" + "\n" + \
-                    "╠ " + key + "MyMid" + "\n" + \
-                    "╠ " + key + "MyName" + "\n" + \
-                    "╠ " + key + "MyBio" + "\n" + \
-                    "╠ " + key + "MyPicture" + "\n" + \
-                    "╠ " + key + "MyVideoProfile" + "\n" + \
-                    "╠ " + key + "MyCover" + "\n" + \
-                    "╠ " + key + "StealContact「Mention」" + "\n" + \
-                    "╠ " + key + "StealMid「Mention」" + "\n" + \
-                    "╠ " + key + "StealName「Mention」" + "\n" + \
-                    "╠ " + key + "StealBio「Mention」" + "\n" + \
-                    "╠ " + key + "StealPicture「Mention」" + "\n" + \
-                    "╠ " + key + "StealVideoProfile「Mention」" + "\n" + \
-                    "╠ " + key + "StealCover「Mention」" + "\n" + \
-                    "╠ " + key + "CloneProfile「Mention」" + "\n" + \
-                    "╠ " + key + "RestoreProfile" + "\n" + \
-                    "╠ " + key + "BackupProfile" + "\n" + \
-                    "╠ " + key + "ChangePictureProfile" + "\n" + \
-                    "╠══[ Group Command ]" + "\n" + \
-                    "╠ " + key + "GroupCreator" + "\n" + \
-                    "╠ " + key + "GroupId" + "\n" + \
-                    "╠ " + key + "GroupName" + "\n" + \
-                    "╠ " + key + "GroupPicture" + "\n" + \
-                    "╠ " + key + "GroupTicket" + "\n" + \
-                    "╠ " + key + "GroupTicket「On/Off」" + "\n" + \
-                    "╠ " + key + "GroupList" + "\n" + \
-                    "╠ " + key + "GroupMemberList" + "\n" + \
-                    "╠ " + key + "GroupInfo" + "\n" + \
-                    "╠ " + key + "ChangeGroupPicture" + "\n" + \
-                    "╠══[ Special Command ]" + "\n" + \
-                    "╠ " + key + "Mimic「On/Off」" + "\n" + \
-                    "╠ " + key + "MimicList" + "\n" + \
-                    "╠ " + key + "MimicAdd「Mention」" + "\n" + \
-                    "╠ " + key + "MimicDel「Mention」" + "\n" + \
-                    "╠ " + key + "Mention" + "\n" + \
-                    "╠ " + key + "Lurking「On/Off/Reset」" + "\n" + \
-                    "╠ " + key + "Lurking" + "\n" + \
-                    "╠══[ Media Command ]" + "\n" + \
-                    "╠ " + key + "CheckDate「Date」" + "\n" + \
-                    "╠ " + key + "CheckWebsite「url」" + "\n" + \
-                    "╠ " + key + "CheckPraytime「Location」" + "\n" + \
-                    "╠ " + key + "CheckWeather「Location」" + "\n" + \
-                    "╠ " + key + "CheckLocation「Location」" + "\n" + \
-                    "╠ " + key + "InstaInfo 「UserName」" + "\n" + \
-                    "╠ " + key + "InstaPost 「UserName」|「Number」" + "\n" + \
-                    "╠ " + key + "InstaStory 「UserName」|「Number」" + "\n" + \
-                    "╠ " + key + "SearchYoutube「Search」" + "\n" + \
-                    "╠ " + key + "SearchMusic 「Search」" + "\n" + \
-                    "╠ " + key + "SearchLyric 「Search」" + "\n" + \
-                    "╠ " + key + "SearchImage 「Search」" + "\n" + \
-                    "╚══[ Copyright @Zero-Cool404 ]"
+    helpMessage =   "[ SELF COMMAND ]" + "\n" + \
+                    "❖➣ " + key + "Me" + "\n" + \
+                    "❖➣ " + key + "MyMid" + "\n" + \
+                    "❖➣ " + key + "MyName" + "\n" + \
+                    "❖➣ " + key + "MyBio" + "\n" + \
+                    "❖➣ " + key + "MyPicture" + "\n" + \
+                    "❖➣ " + key + "MyVideoProfile" + "\n" + \
+                    "❖➣ " + key + "MyCover" + "\n" + \
+                    "❖➣ " + key + "StealContact「@」" + "\n" + \
+                    "❖➣ " + key + "StealMid「@」" + "\n" + \
+                    "❖➣ " + key + "StealName「@」" + "\n" + \
+                    "❖➣ " + key + "StealBio「@」" + "\n" + \
+                    "❖➣ " + key + "StealPicture「@」" + "\n" + \
+                    "❖➣ " + key + "StealVideoProfile「@」" + "\n" + \
+                    "❖➣ " + key + "StealCover「@」" + "\n" + \
+                    "❖➣ " + key + "CloneProfile「@」" + "\n" + \
+                    "❖➣ " + key + "RestoreProfile" + "\n" + \
+                    "❖➣ " + key + "BackupProfile" + "\n" + \
+                    "❖➣ " + key + "ChangePictureProfile" + "\n" + \
+                    "❖➣ " + key + "Restart" + "\n" + \
+                    "❖➣ " + key + "Runtime" + "\n" + \
+                    "❖➣ " + key + "Speed" + "\n" + \
+                    "❖➣ " + key + "Status" + "\n" + \
+                    "❖➣ " + key + "AutoAdd「On/Off」" + "\n" + \
+                    "❖➣ " + key + "AutoJoin「On/Off」" + "\n" + \
+                    "❖➣ " + key + "AutoJoinTicket「On/Off」" + "\n" + \
+                    "❖➣ " + key + "AutoLeave「On/Off」" + "\n" + \
+                    "❖➣ " + key + "AutoRead「On/Off」" + "\n" + \
+                    "❖➣ " + key + "AutoRespon「On/Off」" + "\n" + \
+                    "❖➣ " + key + "CheckContact「On/Off」" + "\n" + \
+                    "❖➣ " + key + "CheckPost「On/Off」" + "\n" + \
+                    "❖➣ " + key + "CheckSticker「On/Off」" + "\n" + \
+                    "❖➣ " + key + "UnsendChat「On/Off」" + "\n" + \
+                    "❖➣ " + key + "ChangeName:「text」" + "\n" + \
+                    "❖➣ " + key + "ChangeBio:「text」" + "\n" + \
+                    "❖➣ " + key + "Mimic「On/Off」" + "\n" + \
+                    "❖➣ " + key + "MimicList" + "\n" + \
+                    "❖➣ " + key + "MimicAdd「@」" + "\n" + \
+                    "❖➣ " + key + "MimicDel「@」" + "\n" + \
+                    "❖➣ " + key + "Mention" + "\n" + \
+                    "❖➣ " + key + "Lurking「On/Off」" + "\n" + \
+                    "❖➣ " + key + "Lurking" + "\n" + \
+                    "❖➣ " + key + "CheckDate「Date」" + "\n" + \
+                    "❖➣ " + key + "CheckWebsite「url」" + "\n" + \
+                    "❖➣ " + key + "CheckPraytime「Location」" + "\n" + \
+                    "❖➣ " + key + "CheckWeather「Location」" + "\n" + \
+                    "❖➣ " + key + "CheckLocation「Location」" + "\n" + \
+                    "❖➣ " + key + "InstaInfo 「UserName」" + "\n" + \
+                    "❖➣ " + key + "InstaPost 「UserName」|「Number」" + "\n" + \
+                    "❖➣ " + key + "InstaStory 「UserName」|「Number」" + "\n" + \
+                    "❖➣ " + key + "SearchYoutube「Search」" + "\n" + \
+                    "❖➣ " + key + "SearchMusic 「Search」" + "\n" + \
+                    "❖➣ " + key + "SearchLyric 「Search」" + "\n" + \
+                    "❖➣ " + key + "SearchImage 「Search」" + "\n" + \
+                    "❖➣[ Created by]: Riando"
     return helpMessage
 
 def helptexttospeech():
@@ -643,9 +622,9 @@ def clientBot(op):
                                     client.sendMessage(to, "Berhasil mengubah key command menjadi [ {} ]".format(str(key).lower()))
                             elif cmd == "speed":
                                 start = time.time()
-                                client.sendMessage(to, "Benchmarking...")
+                                client.sendMessage(to, "❖➣Respawn Speed...")
                                 elapsed_time = time.time() - start
-                                client.sendMessage(to, "[ Speed ]\nKecepatan mengirim pesan {} detik".format(str(elapsed_time)))
+                                client.sendMessage(to, "[ Self Respawn ]\nSpeed❖➣ {} detik".format(str(elapsed_time)))
                             elif cmd == "runtime":
                                 timeNow = time.time()
                                 runtime = timeNow - botStart
@@ -717,30 +696,30 @@ def clientBot(op):
                                 client.sendMessage(to, "Berhasil menonaktifkan unsend message")
                             elif cmd == "status":
                                 try:
-                                    ret_ = "╔══[ Status ]"
-                                    if settings["autoAdd"] == True: ret_ += "\n╠══[ ON ] Auto Add"
-                                    else: ret_ += "\n╠══[ OFF ] Auto Add"
-                                    if settings["autoJoin"] == True: ret_ += "\n╠══[ ON ] Auto Join"
-                                    else: ret_ += "\n╠══[ OFF ] Auto Join"
-                                    if settings["autoLeave"] == True: ret_ += "\n╠══[ ON ] Auto Leave Room"
-                                    else: ret_ += "\n╠══[ OFF ] Auto Leave Room"
-                                    if settings["autoJoinTicket"] == True: ret_ += "\n╠══[ ON ] Auto Join Ticket"
-                                    else: ret_ += "\n╠══[ OFF ] Auto Join Ticket"
-                                    if settings["autoRead"] == True: ret_ += "\n╠══[ ON ] Auto Read"
-                                    else: ret_ += "\n╠══[ OFF ] Auto Read"
-                                    if settings["autoRespon"] == True: ret_ += "\n╠══[ ON ] Detect Mention"
-                                    else: ret_ += "\n╠══[ OFF ] Detect Mention"
-                                    if settings["checkContact"] == True: ret_ += "\n╠══[ ON ] Check Contact"
-                                    else: ret_ += "\n╠══[ OFF ] Check Contact"
-                                    if settings["checkPost"] == True: ret_ += "\n╠══[ ON ] Check Post"
-                                    else: ret_ += "\n╠══[ OFF ] Check Post"
-                                    if settings["checkSticker"] == True: ret_ += "\n╠══[ ON ] Check Sticker"
-                                    else: ret_ += "\n╠══[ OFF ] Check Sticker"
-                                    if settings["setKey"] == True: ret_ += "\n╠══[ ON ] Set Key"
-                                    else: ret_ += "\n╠══[ OFF ] Set Key"
-                                    if settings["unsendMessage"] == True: ret_ += "\n╠══[ ON ] Unsend Message"
-                                    else: ret_ += "\n╠══[ OFF ] Unsend Message"
-                                    ret_ += "\n╚══[ Status ]"
+                                    ret_ = "Self Status "
+                                    if settings["autoAdd"] == True: ret_ += "\n❖➣On Auto Add"
+                                    else: ret_ += "\n❖➣Off Auto Add"
+                                    if settings["autoJoin"] == True: ret_ += "\n❖➣On Auto Join"
+                                    else: ret_ += "\n❖➣Off Auto Join"
+                                    if settings["autoLeave"] == True: ret_ += "\n❖➣On Auto Leave Room"
+                                    else: ret_ += "\n❖➣Off Auto Leave Room"
+                                    if settings["autoJoinTicket"] == True: ret_ += "\n❖➣On Auto Join Ticket"
+                                    else: ret_ += "\n❖➣Off Auto Join Ticket"
+                                    if settings["autoRead"] == True: ret_ += "\n❖➣On Auto Read"
+                                    else: ret_ += "\n❖➣Off Auto Read"
+                                    if settings["autoRespon"] == True: ret_ += "\n❖➣On Detect Mention"
+                                    else: ret_ += "\n❖➣Off Detect Mention"
+                                    if settings["checkContact"] == True: ret_ += "\n❖➣On Check Contact"
+                                    else: ret_ += "\n❖➣Off Check Contact"
+                                    if settings["checkPost"] == True: ret_ += "\n❖➣On Check Post"
+                                    else: ret_ += "\n❖➣Off Check Post"
+                                    if settings["checkSticker"] == True: ret_ += "\n❖➣On Check Sticker"
+                                    else: ret_ += "\n❖➣Off Check Sticker"
+                                    if settings["setKey"] == True: ret_ += "\n❖➣On Set Key"
+                                    else: ret_ += "\n❖➣Off Set Key"
+                                    if settings["unsendMessage"] == True: ret_ += "\n❖➣On Unsend Message"
+                                    else: ret_ += "\n❖➣Off Unsend Message"
+                                    ret_ += "\n[On hidup & Off mati]"
                                     client.sendMessage(to, str(ret_))
                                 except Exception as e:
                                     client.sendMessage(msg.to, str(e))
@@ -1648,10 +1627,10 @@ def clientBot(op):
                             else:
                                 name_ = contact.displayName
                                 ret_ = "Send Message cancelled."
-                                ret_ += "\nSender : @!"
-                                ret_ += "\nSend At : {}".format(str(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"]))))
-                                ret_ += "\nType : {}".format(str(Type._VALUES_TO_NAMES[msg_dict[msg_id]["contentType"]]))
-                                ret_ += "\nText : {}".format(str(msg_dict[msg_id]["text"]))
+                                ret_ += "\n❖➣Sender : @!"
+                                ret_ += "\n❖➣Send At : {}".format(str(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"]))))
+                                ret_ += "\n❖➣Type : {}".format(str(Type._VALUES_TO_NAMES[msg_dict[msg_id]["contentType"]]))
+                                ret_ += "\n❖➣Text : {}".format(str(msg_dict[msg_id]["text"]))
                                 sendMention(at, str(ret_), [contact.mid])
                             del msg_dict[msg_id]
                         else:
